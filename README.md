@@ -1,4 +1,4 @@
-# smart-meters-server
+# simulator-heat-meters
 
 We use [Owner](http://owner.aeonbits.org/) to manage application with Java Properties:
 - `meters_count` - number of separately working simulators
