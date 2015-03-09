@@ -10,20 +10,22 @@ import java.util.Random;
 
 public class HeatAgent extends Agent {
 
-    private BuildingStore buildings = BuildingStore.getInstance();
-    private int building_id         = buildings.getNextBuildingId();
-
-    protected int quarters                       = buildings.getBuilding(building_id).getQuarters();
     protected TestimonialStore store             = TestimonialStore.getInstance();
+    protected int id                             = store.getNextId();
     protected Random randomGenerator             = new Random();
+    protected int quarters                       = randomGenerator.nextInt(90) + 20;
     protected SmartMetersConfig simulationConfig = ConfigFactory.create(SmartMetersConfig.class);
 
-    protected void setHeat() {
-        store.setData(calculateHeat(), Integer.toString(building_id));
+    protected void updateTestimonial() {
+        store.setData(calculateTemperature(), calculateHeat(), id);
     }
 
-    protected String calculateHeat() {
-        return "undefined";
+    protected Double calculateTemperature() {
+        return 0.0;
+    }
+
+    protected Double calculateHeat() {
+        return 0.0;
     }
 
     @Override
@@ -34,7 +36,7 @@ public class HeatAgent extends Agent {
     @Override
     protected void live() {
         while (true) {
-            setHeat();
+            updateTestimonial();
             pause(simulationConfig.meters_heartbeat());
         }
     }

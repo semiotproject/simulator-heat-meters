@@ -7,9 +7,14 @@ package smartmeters;
 public class HeatMeterSPT943_4 extends HeatAgent {
 
     @Override
-    protected String calculateHeat() {
+    protected Double calculateHeat() {
         // TODO: introduce normal calculation
         Double anchor = (quarters / 30.2) - (simulationConfig.outside_temperature() / 10.7);
-        return String.format( "%.2f", randomGenerator.nextInt(10) * 0.1 * anchor );
+        return randomGenerator.nextInt(10) * 0.1 * anchor;
+    }
+
+    protected Double calculateTemperature() {
+        // TODO: introduce normal calculation
+        return randomGenerator.nextInt(10) * 0.2  + 65;
     }
 }
