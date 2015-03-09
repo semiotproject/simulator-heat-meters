@@ -3,6 +3,7 @@ package smartmeters;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -21,6 +22,8 @@ import madkit.kernel.AgentAddress;
 import madkit.kernel.Message;
 
 import smartmeters.TestimonialStore;
+
+import javax.xml.ws.Endpoint;
 
 /**
  * Created by nikolay on 19.02.15.
@@ -42,6 +45,7 @@ public class SubscribeHub extends CoapResource {
         getAttributes().addResourceType("observe");
         getAttributes().setObservable();
         setObserveType(CoAP.Type.CON);
+
 
         timer = new Timer();
         timer.schedule(new TimeTask(), 0, simulationConfig.meters_heartbeat());

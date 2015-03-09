@@ -1,92 +1,84 @@
 package smartmeters;
 
+import java.net.InetSocketAddress;
 import java.net.SocketException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Executors;
 import java.util.logging.Level;
 
 import org.aeonbits.owner.ConfigFactory;
 import org.eclipse.californium.core.CaliforniumLogger;
+import org.eclipse.californium.core.CoapResource;
 import org.eclipse.californium.core.CoapServer;
+import org.eclipse.californium.core.coap.CoAP;
+import org.eclipse.californium.core.network.CoAPEndpoint;
 import org.eclipse.californium.core.network.Endpoint;
+import org.eclipse.californium.core.network.EndpointManager;
+import org.eclipse.californium.core.network.EndpointObserver;
 import org.eclipse.californium.core.network.config.NetworkConfig;
 import org.eclipse.californium.core.network.interceptors.MessageTracer;
 
 import madkit.kernel.Madkit;
+import org.eclipse.californium.core.server.ServerMessageDeliverer;
+import org.eclipse.californium.core.server.resources.CoapExchange;
+import org.eclipse.californium.core.server.resources.Resource;
 
 /**
  * Created by nikolay on 19.02.15.
  */
 
-public class SmartMetersServer extends CoapServer implements IListener {
-    static {
-        CaliforniumLogger.initialize();
-        CaliforniumLogger.setLevel(Level.FINER);
-    }
-
-    // exit codes for runtime errors
-    public static final int ERR_INIT_FAILED = 1;
-    private static final int port = NetworkConfig.getStandard().getInt(NetworkConfig.Keys.COAP_PORT);
+public class SmartMetersServer implements IListener {
 
     private SmartMetersConfig simulationConfig  = ConfigFactory.create(SmartMetersConfig.class);
-    private TestimonialStore store              = TestimonialStore.getInstance();
+    private int start_port                      = simulationConfig.start_port();
 
-    private static Map<String, SubscribeSingle> handlers = new HashMap<String, SubscribeSingle>();
-    private SubscribeHub hub = new SubscribeHub();
+    private static Map<String, CoapResource> handlers = new HashMap<String, CoapResource>();
 
     public static void main(String[] args) {
-        try {
-            CoapServer server = new SmartMetersServer();
-            server.start();
-            System.out.println(SmartMetersServer.class.getSimpleName() + " listening on port " + port);
-        } catch (Exception e) {
-            System.err.println("Exiting");
-            System.exit(ERR_INIT_FAILED);
-        }
+        new SmartMetersServer();
     }
 
-    @Override
-    public void onCreated(String _id) {
-        System.out.println("New meter registered and available on /subscribe/" + _id);
-        registerHandler(_id);
-    }
-
-    @Override
-    public void onUpdated(String id, String data) {
-        System.out.println("Meter with id " + id + " updated; heat = " + data);
-        if (handlers.containsKey(id)) {
-            handlers.get(id).changed();
-        }
-    }
-
-    private void registerHandler(String id) {
-        SubscribeSingle s = new SubscribeSingle(id);
-        handlers.put(id, s);
-        hub.add(s);
-    }
-
-    private void launchAgents() {
+    public SmartMetersServer() {
+        TestimonialStore.getInstance().addListener(this);
         new Madkit(
                 "--launchAgents",
                 HeatMeterSPT943_4.class.getName() + ",false," + Integer.toString(simulationConfig.meters_count())
         );
     }
 
-    public SmartMetersServer() throws SocketException {
-        NetworkConfig.getStandard()
-                .setInt(NetworkConfig.Keys.MAX_MESSAGE_SIZE, 64)
-                .setInt(NetworkConfig.Keys.PREFERRED_BLOCK_SIZE, 64)
-                .setInt(NetworkConfig.Keys.NOTIFICATION_CHECK_INTERVAL_COUNT, 4)
-                .setInt(NetworkConfig.Keys.NOTIFICATION_CHECK_INTERVAL_TIME, 30000)
-                .setString(NetworkConfig.Keys.HEALTH_STATUS_PRINT_LEVEL, "INFO");
+    @Override
+    public void onCreated(String _id) {
+        CoAPEndpoint endpoint = new CoAPEndpoint(start_port++);
+        InetSocketAddress sockAddress = endpoint.getAddress();
+        int port = sockAddress.getPort();
+        CoapServer server = new CoapServer(port) {
+            @Override
+            protected Resource createRoot() {
+                return new SubscribeSingle("10");
+            }
+        };
+        CoapResource topResource = new SubscribeSingle(_id);
 
-        // add observe handler
-        add(hub);
+        server.add(topResource);
+        server.start();
 
-        store.addListener(this);
-
-        launchAgents();
-
+        handlers.put(_id, topResource);
+        System.out.println("New meter registered and available on " + sockAddress.getHostName() + ":" + Integer.toString(port));
     }
+
+    @Override
+    public void onUpdated(String id, String data) {
+        /*
+        System.out.println("Meter with id " + id + " updated; heat = " + data);
+        if (handlers.containsKey(id)) {
+            handlers.get(id).changed();
+        }
+        */
+    }
+
+
 
 }

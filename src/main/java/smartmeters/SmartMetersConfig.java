@@ -12,4 +12,5 @@ public interface SmartMetersConfig extends Config {
     int outside_temperature();
     int coap_ttl();
     int time_to_start();
+    int start_port();
 }

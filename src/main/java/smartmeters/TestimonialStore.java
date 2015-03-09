@@ -39,9 +39,26 @@ public class TestimonialStore {
         String s = "";
         Building b = buildings.getBuilding(Integer.parseInt(id));
         if (data.containsKey(id)) {
+
+        s = "@prefix hmtr: <http://purl.org/NET/ssnext/heatmeters#>\n" +
+            "@prefix meter: <http://purl.org/NET/ssnext/meters/core#>\n" +
+            "\n" +
+            "<#temperature-[meter ID]-[timestamp]> a hmtr:TemperatureObservation ;\n" +
+            "    ssn:observationResultTime “2010-02-23T10:00:21”^^xsd:dateTime ;\n" +
+            "    ssn:observedBy <meter URI> ;\n" +
+            "    ssn:observationResult <#temperature-[meter ID]-[timestamp]-result> .\n" +
+            "\n" +
+            "<#temperature-[meter ID]-[timestamp]-results> a hmtr:TemperatureSensorOutput ;\n" +
+            "    ssn:isProducedBy <meter URI> ;\n" +
+            "    ssn:hasValue <#temperature-[meter ID]-[timestamp]-resultvalue> .\n" +
+            "\n" +
+            "<#temperature-[meter ID]-[timestamp]-resultvalue> a hmtr:TemperatureValue ;\n" +
+            "    meter:hasQuantityValue “80”^^xsd:float";
+/*
             s  = "Адрес - " + b.getAddress() + ", ";
             s += "квартир - " + Integer.toString(b.getQuarters()) + ", ";
             s += "потребляемое тепло - " + data.get(id) + " Гкал";
+*/
         }
         System.out.println(s);
         return s;

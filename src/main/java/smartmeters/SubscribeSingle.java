@@ -25,7 +25,7 @@ public class SubscribeSingle extends CoapResource {
     private String id;
 
     public SubscribeSingle(String _id) {
-        super(_id);
+        super("");
 
         id = _id;
 
@@ -39,7 +39,7 @@ public class SubscribeSingle extends CoapResource {
     @Override
     public void handleGET(CoapExchange exchange) {
         exchange.setMaxAge(simulationConfig.coap_ttl());
-        exchange.respond(CONTENT, store.getData(id), TEXT_PLAIN);
+        exchange.respond(CONTENT, id, TEXT_PLAIN);
     }
 
     @Override
