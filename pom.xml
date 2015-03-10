@@ -2,16 +2,16 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion><properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>ru.semiot</groupId>
+    <artifactId>simulator-heat-meters</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.build.javaVersion>1.7</project.build.javaVersion>
         <element.connector.version>${project.version}</element.connector.version>
     </properties>
-
-
-    <groupId>com.smartmeters</groupId>
-    <artifactId>smartmetersserver</artifactId>
-    <version>1.0-SNAPSHOT</version>
 
     <dependencies>
         <dependency>
@@ -22,9 +22,7 @@
         <dependency>
             <groupId>madkit</groupId>
             <artifactId>madkit</artifactId>
-            <version>1.0</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/lib/madkit/madkit-5.0.5.1.jar</systemPath>
+            <version>5.0.5.1</version>
         </dependency>
         <dependency>
             <groupId>org.aeonbits.owner</groupId>
@@ -37,7 +35,6 @@
             <version>1.1.1</version>
         </dependency>
     </dependencies>
-
     <build>
         <plugins>
             <plugin>
@@ -54,7 +51,6 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>2.2</version>
-                <!-- nothing here -->
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -64,7 +60,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>smartmeters.Application</mainClass>
+                            <mainClass>ru.semiot.simulator.heatmeter.Application</mainClass>
                             <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
                         </manifest>
                     </archive>
@@ -82,40 +78,21 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>copy-installed</id>
-                        <phase>install</phase>
-                        <goals>
-                            <goal>copy</goal>
-                        </goals>
-                        <configuration>
-                            <artifactItems>
-                                <artifactItem>
-                                    <groupId>${project.groupId}</groupId>
-                                    <artifactId>${project.artifactId}</artifactId>
-                                    <version>${project.version}</version>
-                                    <type>${project.packaging}</type>
-                                </artifactItem>
-                            </artifactItems>
-                            <outputDirectory>../run/</outputDirectory>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
         </plugins>
     </build>
-
     <repositories>
+        <repository>
+            <id>in-project</id>
+            <name>In Project Repo</name>
+            <url>file://${project.basedir}/libs</url>
+            <releases>
+                <updatePolicy>always</updatePolicy>
+            </releases>
+        </repository>
         <repository>
             <id>repo.eclipse.org</id>
             <name>Californium Repository</name>
             <url>https://repo.eclipse.org/content/repositories/californium/</url>
         </repository>
     </repositories>
-
-
 </project>

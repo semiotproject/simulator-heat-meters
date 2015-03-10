@@ -1,24 +1,20 @@
-package smartmeters;
+package ru.semiot.simulator.heatmeter;
 
-import org.aeonbits.owner.ConfigFactory;
 import org.eclipse.californium.core.CoapServer;
 import org.eclipse.californium.core.server.resources.Resource;
 
-/**
- * Created by Admin on 09.03.2015.
- */
 public class Server extends CoapServer {
 
     protected TestimonialStore store  = TestimonialStore.getInstance();
-    private int _id = store.getId();
-    private int _port;
+    private final int id = store.getId();
+    private final int port;
 
     public Server(int port) {
         super(port);
-        _port = port;
+        this.port = port;
     }
     @Override
     protected Resource createRoot() {
-        return new DescriptionResource(_id);
+        return new DescriptionResource(id);
     }
 }

@@ -1,26 +1,20 @@
-package smartmeters;
-
-import org.aeonbits.owner.ConfigFactory;
+package ru.semiot.simulator.heatmeter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
-/**
- * Created by nikolay on 19.02.15.
- */
-
 public class TestimonialStore {
 
-    private List<IListener> listeners = new ArrayList<IListener>();
-    private static Map<Integer,Testimonial> data = new HashMap<Integer,Testimonial>();
-
-    private static TestimonialStore instance = new TestimonialStore();
+    private static final Map<Integer, Testimonial> data = new HashMap<>();
+    private static final TestimonialStore instance = new TestimonialStore();
+    private final List<IListener> listeners = new ArrayList<>();
     private int current_id = 0;
 
-    public TestimonialStore() {}
+    public TestimonialStore() {
+    }
+
     public static TestimonialStore getInstance() {
         return instance;
     }
@@ -45,18 +39,18 @@ public class TestimonialStore {
         }
     }
 
-    public void setData(double _temperature, double _heat, int _id) {
+    public void setData(double temperature, double heat, int id) {
         Testimonial t;
-        if (!data.containsKey(_id)) {
+        if (!data.containsKey(id)) {
             for (IListener l : listeners) {
-                l.onCreated(_id);
+                l.onCreated(id);
             }
-            data.put(_id, new Testimonial());
+            data.put(id, new Testimonial());
         }
-        t = data.get(_id);
-        t.update(_temperature, _heat);
+        t = data.get(id);
+        t.update(temperature, heat);
         for (IListener l : listeners) {
-            l.onUpdated(_id, t);
+            l.onUpdated(id, t);
         }
     }
 }

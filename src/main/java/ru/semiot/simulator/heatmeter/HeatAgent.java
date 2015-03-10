@@ -1,20 +1,18 @@
-package smartmeters;
+package ru.semiot.simulator.heatmeter;
 
 import madkit.kernel.Agent;
 import org.aeonbits.owner.ConfigFactory;
 import java.util.Random;
-
-/**
- * Created by nikolay on 19.02.15.
- */
+import java.util.logging.Level;
 
 public class HeatAgent extends Agent {
 
-    protected TestimonialStore store             = TestimonialStore.getInstance();
-    protected int id                             = store.getNextId();
-    protected Random randomGenerator             = new Random();
-    protected int quarters                       = randomGenerator.nextInt(90) + 20;
-    protected SmartMetersConfig simulationConfig = ConfigFactory.create(SmartMetersConfig.class);
+    protected TestimonialStore store = TestimonialStore.getInstance();
+    protected int id = store.getNextId();
+    protected Random randomGenerator = new Random();
+    protected int quarters = randomGenerator.nextInt(90) + 20;
+    protected SmartMetersConfig simulationConfig = 
+            ConfigFactory.create(SmartMetersConfig.class);
 
     protected void updateTestimonial() {
         store.setData(calculateTemperature(), calculateHeat(), id);
@@ -44,7 +42,7 @@ public class HeatAgent extends Agent {
     @Override
     protected void end() {
         if (logger != null) {
-            logger.info(this.getName() + " stopping..");
+            logger.log(Level.INFO, "{0} stopping..", this.getName());
         }
     }
 }

@@ -1,8 +1,4 @@
-package smartmeters;
-
-/**
- * Created by nikolay on 02.03.15.
- */
+package ru.semiot.simulator.heatmeter;
 
 public class HeatMeterSPT943_4 extends HeatAgent {
 
@@ -13,6 +9,7 @@ public class HeatMeterSPT943_4 extends HeatAgent {
         return randomGenerator.nextInt(10) * 0.1 * anchor;
     }
 
+    @Override
     protected Double calculateTemperature() {
         // TODO: introduce normal calculation
         return randomGenerator.nextInt(10) * 0.2  + 65;

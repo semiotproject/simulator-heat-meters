@@ -1,8 +1,5 @@
-package smartmeters;
+package ru.semiot.simulator.heatmeter;
 
-/**
- * Created by Admin on 09.03.2015.
- */
 public class Testimonial {
 
     private Double temperature;

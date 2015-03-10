@@ -1,36 +1,24 @@
-package smartmeters;
+package ru.semiot.simulator.heatmeter;
 
-/**
- * Created by nikolay on 02.03.15.
- */
-
-import org.aeonbits.owner.ConfigFactory;
 import org.eclipse.californium.core.CoapResource;
 import org.eclipse.californium.core.coap.CoAP;
 import org.eclipse.californium.core.server.resources.CoapExchange;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
 import static org.eclipse.californium.core.coap.CoAP.ResponseCode.*;
-import static org.eclipse.californium.core.coap.CoAP.ResponseCode.DELETED;
 import static org.eclipse.californium.core.coap.MediaTypeRegistry.TEXT_PLAIN;
-
-/**
- * Created by nikolay on 19.02.15.
- */
 
 public class HeatResource extends CoapResource {
 
-    private int id;
-    private int port;
-    private TestimonialStore store = TestimonialStore.getInstance();
+    private final int id;
+    private final int port;
+    private final TestimonialStore store = TestimonialStore.getInstance();
 
-    public HeatResource(int _port, int _id) {
+    public HeatResource(int port, int id) {
         super("heat");
 
-        id = _id;
-        port = _port;
+        this.id = id;
+        this.port = port;
 
         setObservable(true);
         getAttributes().setTitle("Endpoint for heat testimonials ");
@@ -40,7 +28,8 @@ public class HeatResource extends CoapResource {
     }
 
     private String toTurtle(double heat, long timestamp) {
-        String date = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").format(new Date(timestamp * 1000));
+        String date = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
+                .format(new Date(timestamp * 1000));
 
         return  "@prefix hmtr: <http://purl.org/NET/ssnext/heatmeters#>\n" +
                 "@prefix meter: <http://purl.org/NET/ssnext/meters/core#>\n" +
