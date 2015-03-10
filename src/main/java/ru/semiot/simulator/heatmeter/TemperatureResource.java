@@ -37,14 +37,14 @@ public class TemperatureResource extends CoapResource {
                 + String.format("<#temperature-%s-%d> a hmtr:TemperatureObservation ;\n", id, timestamp)
                 + String.format("    ssn:observationResultTime “%s”^^xsd:dateTime ;\n", date)
                 + String.format("    ssn:observedBy <%s> ;\n", "localhost:" + Integer.toString(port))
-                + String.format("    ssn:observationResult <#temperature-%s-%d-%.2f> .\n", id, timestamp, temperature)
+                + String.format("    ssn:observationResult <#temperature-%s-%d-result> .\n", id, timestamp)
                 + "\n"
                 + String.format("<#temperature-%s-%d-results> a hmtr:TemperatureSensorOutput ;\n", id, timestamp)
                 + String.format("    ssn:isProducedBy <%s> ;\n", "localhost:" + Integer.toString(port))
-                + String.format("    ssn:hasValue <#temperature-%s-%d-%.2f> .\n", id, timestamp, temperature)
+                + String.format("    ssn:hasValue <#temperature-%s-%d-resultvalue> .\n", id, timestamp)
                 + "\n"
-                + String.format("<#temperature-%s-%d-%.2f> a hmtr:TemperatureValue ;\n", id, timestamp, temperature)
-                + "    meter:hasQuantityValue “80”^^xsd:float";
+                + String.format("<#temperature-%s-%d-resultvalue> a hmtr:TemperatureValue ;\n", id, timestamp)
+                + String.format("    meter:hasQuantityValue “%.2f”^^xsd:float", temperature);
     }
 
     @Override

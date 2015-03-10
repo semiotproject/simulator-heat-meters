@@ -37,14 +37,14 @@ public class HeatResource extends CoapResource {
                 String.format("<#heat-%s-%d> a hmtr:HeatObservation ;\n", id, timestamp) +
                 String.format("    ssn:observationResultTime “%s”^^xsd:dateTime ;\n", date) +
                 String.format("    ssn:observedBy <%s> ;\n", "localhost:" + Integer.toString(port)) +
-                String.format("    ssn:observationResult <#heat-%s-%d-%.2f> .\n", id, timestamp, heat) +
+                String.format("    ssn:observationResult <#heat-%s-%d-result> .\n", id, timestamp) +
                 "\n" +
                 String.format("<#heat-%s-%d-results> a hmtr:HeatSensorOutput ;\n", id, timestamp) +
                 String.format("    ssn:isProducedBy <%s> ;\n", "localhost:" + Integer.toString(port)) +
-                String.format("    ssn:hasValue <#heat-%s-%d-%.2f> .\n", id, timestamp, heat) +
+                String.format("    ssn:hasValue <#heat-%s-%d-resultvalue> .\n", id, timestamp) +
                 "\n" +
-                String.format("<#heat-%s-%d-%.2f> a hmtr:HeatValue ;\n", id, timestamp, heat) +
-                "    meter:hasQuantityValue “80”^^xsd:float";
+                String.format("<#heat-%s-%d-resultvalue> a hmtr:HeatValue ;\n", id, timestamp) +
+                String.format("    meter:hasQuantityValue “%.2f”^^xsd:float", heat);
     }
 
     @Override
