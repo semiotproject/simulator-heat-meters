@@ -1,5 +1,6 @@
 #!/bin/bash
 
+wget=/usr/bin/wget
 
 APP_DIR=./simulator
 APP_NAME=simulator-heat-meter-1.0-SNAPSHOT
