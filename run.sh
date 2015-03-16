@@ -1,8 +1,7 @@
 #!/bin/bash
 
-ls -a
 
-APP_DIR=./simulator/simulator-heat-meter
+APP_DIR=./simulator
 APP_NAME=simulator-heat-meter-1.0-SNAPSHOT
 
 pushd $APP_DIR
