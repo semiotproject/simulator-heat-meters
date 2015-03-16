@@ -1,6 +1,7 @@
 #!/bin/bash
 
-wget=/usr/bin/wget
+which wget
+
 
 APP_DIR=./simulator
 APP_NAME=simulator-heat-meter-1.0-SNAPSHOT
@@ -9,7 +10,7 @@ pushd $APP_DIR
 
 git pull
 
-mvn clean package -DskipTests=true
+#mvn clean package -DskipTests=true
 
 wget ${SIMULATOR_CONFIG} -O ./simulatorConfig.xml
 
