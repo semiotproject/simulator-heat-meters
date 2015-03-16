@@ -9,7 +9,7 @@ git pull
 
 #mvn clean package -DskipTests=true
 
-~/simulator/wget ${SIMULATOR_CONFIG} -O ./simulatorConfig.xml
+wget ${SIMULATOR_CONFIG} -O ./simulatorConfig.xml
 
 cat ./simulatorConfig.xml
 #java -jar ${APP_DIR}/target/${APP_NAME}.jar
