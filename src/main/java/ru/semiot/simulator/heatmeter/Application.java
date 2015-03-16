@@ -7,25 +7,29 @@ import java.util.Map;
 import org.aeonbits.owner.ConfigFactory;
 import org.eclipse.californium.core.CoapResource;
 
+import static ru.semiot.simulator.heatmeter.SmartMetersConfig.conf;
+
 import madkit.kernel.Madkit;
 
 public class Application implements IListener {
 
     private static final Map<Integer, List<CoapResource>> handlers = new HashMap<>();
-    private final SmartMetersConfig simulationConfig
-            = ConfigFactory.create(SmartMetersConfig.class);
-    private int start_port = simulationConfig.start_port();
+    private int start_port;
 
     public static void main(String[] args) {
+        if (args.length > 0 && !args[0].isEmpty()) {
+            conf.setConfigFromFile(args[0]);
+        }
         new Application();
     }
 
     public Application() {
+        start_port = conf.getStartPort();
         TestimonialStore.getInstance().addListener(this);
         new Madkit(
                 "--launchAgents",
                 HeatMeterSPT943_4.class.getName() + ",false,"
-                + Integer.toString(simulationConfig.meters_count())
+                + Integer.toString(conf.getMetersCount())
         );
     }
 

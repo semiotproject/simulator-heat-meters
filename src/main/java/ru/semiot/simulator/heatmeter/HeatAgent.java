@@ -5,14 +5,14 @@ import org.aeonbits.owner.ConfigFactory;
 import java.util.Random;
 import java.util.logging.Level;
 
+import static ru.semiot.simulator.heatmeter.SmartMetersConfig.conf;
+
 public class HeatAgent extends Agent {
 
     protected TestimonialStore store = TestimonialStore.getInstance();
     protected int id = store.getNextId();
     protected Random randomGenerator = new Random();
     protected int quarters = randomGenerator.nextInt(90) + 20;
-    protected SmartMetersConfig simulationConfig = 
-            ConfigFactory.create(SmartMetersConfig.class);
 
     protected void updateTestimonial() {
         store.setData(calculateTemperature(), calculateHeat(), id);
@@ -28,14 +28,14 @@ public class HeatAgent extends Agent {
 
     @Override
     protected void activate() {
-        pause(randomGenerator.nextInt((simulationConfig.time_to_start()) + 1));
+        pause((randomGenerator.nextInt((conf.getTimeToStart())) + 1) * 1000);
     }
 
     @Override
     protected void live() {
         while (true) {
             updateTestimonial();
-            pause(simulationConfig.meters_heartbeat());
+            pause(conf.getMetersHeartbeat());
         }
     }
 

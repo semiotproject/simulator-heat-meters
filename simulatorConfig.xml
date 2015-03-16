@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<config>
+    <metersCount>1</metersCount>
+    <metersHeartbeat>10000</metersHeartbeat>
+    <outsideTemperature>3</outsideTemperature>
+    <quartersMax>200</quartersMax>
+    <quartersMin>80</quartersMin>
+    <timeToStart>3</timeToStart>
+    <startPort>60000</startPort>
+</config>
