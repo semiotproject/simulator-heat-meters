@@ -10,7 +10,7 @@ RUN \
 
 # Maven
 RUN apt-get update
-RUN apt-get install -y maven git
+RUN apt-get install -y maven git wget
 
 ENV JAVA_HOME /usr/lib/jvm/java-7-openjdk-amd64
 
