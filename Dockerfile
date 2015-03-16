@@ -14,6 +14,10 @@ RUN apt-get install -y maven git
 
 ENV JAVA_HOME /usr/lib/jvm/java-7-openjdk-amd64
 
-RUN git clone https://github.com/semiotproject/simulator-heat-meters.git /root/simulator
+RUN git clone https://github.com/semiotproject/simulator-heat-meters.git  /root/simulator
 
-CMD ./run.sh
+RUN chmod 777 ./simulator/simulator-heat-meter/run.sh
+
+CMD ./simulator/simulator-heat-meter/run.sh
+
+
