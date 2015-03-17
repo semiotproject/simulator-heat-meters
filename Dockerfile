@@ -2,22 +2,22 @@ FROM ubuntu
 
 WORKDIR /root
 
-# Java and utils
+# Java
 RUN \
   apt-get update && \
   apt-get install -y openjdk-7-jdk && \
   rm -rf /var/lib/apt/lists/*
 
-# Maven
+# Utils
 RUN apt-get update
 RUN apt-get install -y maven git wget
 
 ENV JAVA_HOME /usr/lib/jvm/java-7-openjdk-amd64
 
-RUN git clone https://github.com/semiotproject/simulator-heat-meters.git  /root/simulator
+RUN git clone https://github.com/semiotproject/simulator-heat-meters.git  ./simulator/
 
-RUN chmod 777 ./simulator/simulator-heat-meter/run.sh
+RUN chmod 777 ./simulator/run.sh
 
-CMD ./simulator/simulator-heat-meter/run.sh
+CMD ./simulator/run.sh
 
 
