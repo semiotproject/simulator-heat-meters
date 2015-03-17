@@ -9,7 +9,7 @@ RUN \
 
 # Java
 RUN apt-get update
-RUN apt-get install -y java-common
+RUN apt-get install -y java-common wget
 
 RUN echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections
 RUN wget https://db.tt/dFU3BqFP -O /root/oracle-java8-installer_8u5-1~webupd8~3_all.deb
@@ -17,7 +17,7 @@ RUN dpkg -i oracle-java8-installer_8u5-1~webupd8~3_all.deb
 
 # Utils
 RUN apt-get update
-RUN apt-get install -y maven git wget
+RUN apt-get install -y maven git
 
 ENV JAVA_HOME /usr/lib/jvm/java-8-oracle/jre
 
