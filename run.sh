@@ -11,7 +11,7 @@ mvn clean package -DskipTests=true
 
 wget ${SIMULATOR_CONFIG} -O ./simulatorConfig.xml
 
-java -jar ${APP_DIR}/target/${APP_NAME}.jar simulatorConfig.xml
+java -jar ./target/${APP_NAME}.jar simulatorConfig.xml
 
 popd
 	

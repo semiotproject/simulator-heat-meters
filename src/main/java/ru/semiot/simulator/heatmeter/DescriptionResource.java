@@ -11,11 +11,11 @@ public class DescriptionResource extends CoapResource {
     private final String text;
 
     public DescriptionResource(int id) {
-        super("");
+        super("desc");
         this.id = id;
         this.text = "@prefix hmtr: <http://purl.org/NET/ssnext/heatmeters#>\n"
                 + "\n"
-                + String.format("<#meter-%s> a emtr:HeatMeter .", Integer.toString(id));
+                + String.format("<#meter-%s> a hmtr:HeatMeter .", Integer.toString(id));
         getAttributes().setTitle(text);
     }
 

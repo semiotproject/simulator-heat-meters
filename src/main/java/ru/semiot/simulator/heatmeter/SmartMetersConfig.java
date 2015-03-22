@@ -34,6 +34,7 @@ public class SmartMetersConfig {
         data.put("quartersMin", Integer.toString(80));
         data.put("timeToStart", Integer.toString(10));
         data.put("startPort", Integer.toString(60000));
+        data.put("registerURI", "coap://localhost:3131/register");
     }
 
     public void setConfigFromFile(String filename) {
@@ -76,6 +77,10 @@ public class SmartMetersConfig {
 
     public int getStartPort() {
         return Integer.parseInt(data.get("startPort"));
+    }
+
+    public String getRegisterURI() {
+        return data.get("registerURI");
     }
 
 }

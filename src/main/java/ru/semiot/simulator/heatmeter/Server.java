@@ -13,8 +13,4 @@ public class Server extends CoapServer {
         super(port);
         this.port = port;
     }
-    @Override
-    protected Resource createRoot() {
-        return new DescriptionResource(id);
-    }
 }
