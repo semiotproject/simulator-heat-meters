@@ -53,11 +53,10 @@ public class Application implements IListener {
         server.start();
 
         handlers.put(_id, Arrays.asList(temperature, heat));
-        String payload = "New meter registered and available on localhost:"
-                + Integer.toString(port);
-        System.out.println(payload);
+        System.out.println("New meter registered and available on localhost:"
+                + Integer.toString(port));
 
-        notifier.post(payload, MediaTypeRegistry.TEXT_PLAIN);
+        notifier.post(String.format(DescriptionResource.text, Integer.toString(_id)), MediaTypeRegistry.TEXT_PLAIN);
     }
 
     @Override
