@@ -1,7 +1,7 @@
 #!/bin/bash
 
 APP_DIR=/root/simulator/
-APP_NAME=simulator-heat-meters-1.0-SNAPSHOT
+APP_NAME=simulator-heat-meters-1.0-SNAPSHOT-jar-with-dependencies
 SIMULATOR_CONFIG=https://raw.githubusercontent.com/semiotproject/simulator-heat-meters/master/simulatorConfig.xml
 
 pushd $APP_DIR
