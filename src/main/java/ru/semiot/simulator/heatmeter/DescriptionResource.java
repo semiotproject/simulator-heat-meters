@@ -9,9 +9,9 @@ public class DescriptionResource extends CoapResource {
 
     private final int id;
     public static final String text = ""
-            +"@prefix hmtr: <http://purl.org/NET/ssnext/heatmeters#>\n"
+            +"@prefix hmtr: <http://purl.org/NET/ssnext/heatmeters#>\n."
             + "\n"
-            + "<#meter-%s> a hmtr:HeatMeter .";
+            + "<#meter-%s> a hmtr:HeatMeter.";
 
     public DescriptionResource(int id) {
         super("desc");
