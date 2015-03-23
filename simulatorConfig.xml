@@ -7,5 +7,5 @@
     <quartersMin>80</quartersMin>
     <timeToStart>30</timeToStart>
     <startPort>60000</startPort>
-    <registerURI>coap://localhost:3131/register</registerURI>
+    <registerURI>coap://deviceproxyservice:3131/register</registerURI>
 </config>
