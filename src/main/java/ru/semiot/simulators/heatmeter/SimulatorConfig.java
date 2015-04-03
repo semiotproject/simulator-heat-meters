@@ -12,6 +12,10 @@ public interface SimulatorConfig extends Config {
     @Key("hostname")
     public String hostname();
     
+    @DefaultValue("59999")
+    @Key("clientPort")
+    public int clientPort();
+    
     @DefaultValue("3")
     @Key("count")
     public int metersCount();

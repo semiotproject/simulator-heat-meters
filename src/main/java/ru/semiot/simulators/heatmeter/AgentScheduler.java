@@ -6,6 +6,7 @@ import java.util.concurrent.TimeUnit;
 import madkit.kernel.Scheduler;
 import org.aeonbits.owner.ConfigFactory;
 import org.eclipse.californium.core.CoapClient;
+import org.eclipse.californium.core.network.CoAPEndpoint;
 import ru.semiot.simulators.heatmeter.agents.HeatAgent;
 
 public class AgentScheduler extends Scheduler {
@@ -14,12 +15,16 @@ public class AgentScheduler extends Scheduler {
             SimulatorConfig.class);
     private static final ExecutorService executor = Executors.newFixedThreadPool(
             config.nbOfParallelTaks());
+    private CoapClient coapClient;
 
     @Override
-    protected void activate() {        
+    protected void activate() {     
+        coapClient = new CoapClient(config.registerURI());
+        coapClient.setEndpoint(new CoAPEndpoint(59999));
+        
         for (int port = config.startPort(); 
                 port < config.startPort() + config.metersCount(); port++) {
-            executor.submit(new Runner(this, port));
+            executor.submit(new Runner(this, coapClient, port));
         }
     }
 
@@ -38,15 +43,18 @@ public class AgentScheduler extends Scheduler {
 
         private final Scheduler scheduler;
         private final int port;
+        private final CoapClient coapClient;
         
-        public Runner(final Scheduler scheduler, final int port) {
+        public Runner(final Scheduler scheduler, final CoapClient coapClient, 
+                final int port) {
             this.scheduler = scheduler;
             this.port = port;
+            this.coapClient = coapClient;
         }
 
         @Override
         public void run() {
-            final Server server = new Server(port);
+            final Server server = new Server(coapClient, port);
             
             scheduler.launchAgent(new HeatAgent(server));
             
