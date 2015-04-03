@@ -1,6 +1,6 @@
-@prefix hmtr: <http://purl.org/NET/ssnext/heatmeters#>
-@prefix meter: <http://purl.org/NET/ssnext/meters/core#>
-@prefix : <coap://${HOST}:${PORT}/meter/temperature#>
+@prefix hmtr: <http://purl.org/NET/ssnext/heatmeters#> .
+@prefix meter: <http://purl.org/NET/ssnext/meters/core#> .
+@prefix : <coap://${HOST}:${PORT}/meter/temperature#> .
 
 :${TIMESTAMP} a hmtr:TemperatureObservation ;
     ssn:observationResultTime "${DATETIME}"^^xsd:dateTime ;
