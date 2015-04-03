@@ -17,6 +17,6 @@
     ssncom:hasCommunicationEndpoint <coap://${HOST}:${PORT}/meter/heat/obs> .
 
 <coap://${HOST}:${PORT}/meter/temperature/obs> a ssncom:CommunicationEndpoint ;
-    ssncoom:protocol "COAP" .
+    ssncom:protocol "COAP" .
 <coap://${HOST}:${PORT}/meter/heat/obs> a ssncom:CommunicationEndpoint ;
-    ssncoom:protocol "COAP" .
+    ssncom:protocol "COAP" .
