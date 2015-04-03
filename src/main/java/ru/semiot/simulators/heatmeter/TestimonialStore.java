@@ -1,4 +1,4 @@
-package ru.semiot.simulator.heatmeter;
+package ru.semiot.simulators.heatmeter;
 
 import java.util.ArrayList;
 import java.util.HashMap;

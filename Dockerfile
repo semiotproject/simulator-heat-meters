@@ -1,25 +1,15 @@
-FROM ubuntu
+FROM fedora
 
-WORKDIR /root
+ENV APP_DIR=/simulator-heat-meters
+ENV APP_JAR=simulator-heat-meters-1.0-SNAPSHOT-jar-with-dependencies.jar
 
-# Java
-RUN apt-get update
-RUN apt-get install -y wget binutils java-common unzip
+RUN yum update && yum install -y wget binutils unzip java-1.8.0-openjdk-devel \
+yum install -y maven git
 
-RUN echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections
-RUN wget https://db.tt/dFU3BqFP -O /root/oracle-java8-installer_8u5-1~webupd8~3_all.deb
-RUN dpkg -i oracle-java8-installer_8u5-1~webupd8~3_all.deb
+RUN git clone https://github.com/semiotproject/simulator-heat-meters.git
 
-# Utils
-RUN apt-get update
-RUN apt-get install -y maven git
+WORKDIR $APP_DIR
 
-ENV JAVA_HOME /usr/lib/jvm/java-8-oracle/jre
+RUN mvn clean install -DskipTests=true && rm -rf ~/.m2/repository
 
-RUN git clone https://github.com/semiotproject/simulator-heat-meters.git  ./simulator/
-
-RUN chmod 777 ./simulator/run.sh
-
-CMD ./simulator/run.sh
-
-
+CMD java -jar target/$APP_JAR

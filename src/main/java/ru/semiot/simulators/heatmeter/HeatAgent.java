@@ -1,14 +1,14 @@
-package ru.semiot.simulator.heatmeter;
+package ru.semiot.simulators.heatmeter;
 
 import madkit.kernel.Agent;
 import org.aeonbits.owner.ConfigFactory;
 import java.util.Random;
 import java.util.logging.Level;
 
-import static ru.semiot.simulator.heatmeter.SmartMetersConfig.conf;
-
 public class HeatAgent extends Agent {
 
+    private static final SimulatorConfig config = ConfigFactory.create(
+            SimulatorConfig.class);
     protected TestimonialStore store = TestimonialStore.getInstance();
     protected int id = store.getNextId();
     protected Random randomGenerator = new Random();
@@ -28,14 +28,14 @@ public class HeatAgent extends Agent {
 
     @Override
     protected void activate() {
-        pause((randomGenerator.nextInt((conf.getTimeToStart())) + 1) * 1000);
+        pause((randomGenerator.nextInt((config.timeToStart())) + 1) * 1000);
     }
 
     @Override
     protected void live() {
         while (true) {
             updateTestimonial();
-            pause(conf.getMetersHeartbeat());
+            pause(config.metersHeartbeat());
         }
     }
 

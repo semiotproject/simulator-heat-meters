@@ -1,4 +1,4 @@
-package ru.semiot.simulator.heatmeter;
+package ru.semiot.simulators.heatmeter;
 
 import org.eclipse.californium.core.CoapResource;
 import org.eclipse.californium.core.server.resources.CoapExchange;

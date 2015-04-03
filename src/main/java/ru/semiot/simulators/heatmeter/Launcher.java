@@ -1,4 +1,4 @@
-package ru.semiot.simulator.heatmeter;
+package ru.semiot.simulators.heatmeter;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -8,33 +8,27 @@ import org.aeonbits.owner.ConfigFactory;
 import org.eclipse.californium.core.CoapClient;
 import org.eclipse.californium.core.CoapResource;
 import org.eclipse.californium.core.coap.MediaTypeRegistry;
-
-
-import static ru.semiot.simulator.heatmeter.SmartMetersConfig.conf;
-
 import madkit.kernel.Madkit;
 
-public class Application implements IListener {
+public class Launcher implements IListener {
 
+    private static final SimulatorConfig config = ConfigFactory.create(
+            SimulatorConfig.class);
     private static final Map<Integer, List<CoapResource>> handlers = new HashMap<>();
-    private CoapClient notifier;
-    private int start_port;
+    private final CoapClient notifier = new CoapClient(config.registerURI());
+    private int start_port = config.startPort();
 
     public static void main(String[] args) {
-        if (args.length > 0 && !args[0].isEmpty()) {
-            conf.setConfigFromFile(args[0]);
-        }
-        new Application();
+        Launcher launcher = new Launcher();
+        launcher.run(args);
     }
 
-    public Application() {
-        start_port = conf.getStartPort();
-        notifier = new CoapClient(conf.getRegisterURI());
+    public void run(final String[] args) {
         TestimonialStore.getInstance().addListener(this);
         new Madkit(
                 "--launchAgents",
                 HeatMeterSPT943_4.class.getName() + ",false,"
-                + Integer.toString(conf.getMetersCount())
+                + Integer.toString(config.metersCount())
         );
     }
 
@@ -56,7 +50,8 @@ public class Application implements IListener {
         System.out.println("New meter registered and available on localhost:"
                 + Integer.toString(port));
 
-        notifier.post(String.format(DescriptionResource.text, Integer.toString(_id), Integer.toString(_id)), MediaTypeRegistry.TEXT_PLAIN);
+        notifier.post(String.format(DescriptionResource.text, Integer.toString(_id),
+                Integer.toString(_id)), MediaTypeRegistry.TEXT_PLAIN);
     }
 
     @Override

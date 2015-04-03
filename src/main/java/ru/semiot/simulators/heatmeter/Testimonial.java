@@ -1,4 +1,4 @@
-package ru.semiot.simulator.heatmeter;
+package ru.semiot.simulators.heatmeter;
 
 public class Testimonial {
 
