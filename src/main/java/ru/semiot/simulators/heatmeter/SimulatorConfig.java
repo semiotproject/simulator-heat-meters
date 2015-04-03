@@ -8,6 +8,10 @@ import org.aeonbits.owner.Config;
 })
 public interface SimulatorConfig extends Config {
     
+    @DefaultValue("localhost")
+    @Key("hostname")
+    public String hostname();
+    
     @DefaultValue("3")
     @Key("count")
     public int metersCount();
@@ -39,5 +43,9 @@ public interface SimulatorConfig extends Config {
     @DefaultValue("coap://localhost:3131/register")
     @Key("registerURI")
     public String registerURI();
+    
+    @DefaultValue("5")
+    @Key("nbOfParallelTaks")
+    public int nbOfParallelTaks();
     
 }

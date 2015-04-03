@@ -1,16 +1,38 @@
 package ru.semiot.simulators.heatmeter;
 
+import java.util.Observable;
+import java.util.Observer;
+import org.eclipse.californium.core.CoapResource;
 import org.eclipse.californium.core.CoapServer;
-import org.eclipse.californium.core.server.resources.Resource;
+import ru.semiot.simulators.heatmeter.coap.DescriptionResource;
+import ru.semiot.simulators.heatmeter.coap.HeatResource;
+import ru.semiot.simulators.heatmeter.coap.TemperatureResource;
 
-public class Server extends CoapServer {
+public class Server extends CoapServer implements Observer {
 
-    protected TestimonialStore store  = TestimonialStore.getInstance();
-    private final int id = store.getId();
-    private final int port;
+    private final TemperatureResource temperature;
+    private final HeatResource heat;
+    private final DescriptionResource description;
 
     public Server(int port) {
         super(port);
-        this.port = port;
+
+        temperature = new TemperatureResource(port);
+        heat = new HeatResource(port, port);
+        description = new DescriptionResource(port);
+
+        add(description.add(
+                new CoapResource("temperature").add(temperature),
+                new CoapResource("heat").add(heat)));
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        Double[] updates = (Double[]) arg;
+        temperature.setTemperature(updates[0]);
+        temperature.changed();
+        
+        heat.setHeat(updates[1]);
+        heat.changed();
     }
 }
