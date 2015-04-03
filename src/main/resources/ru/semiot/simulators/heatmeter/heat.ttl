@@ -3,7 +3,7 @@
 @prefix : <coap://${HOST}:${PORT}/meter/heat#>
 
 :${TIMESTAMP} a hmtr:HeatObservation ;
-    ssn:observationResultTime “${DATETIME}”^^xsd:dateTime ;
+    ssn:observationResultTime "${DATETIME}"^^xsd:dateTime ;
     ssn:observedBy <coap://${HOST}:${PORT}/meter> ;
     ssn:observationResult :${TIMESTAMP}-result .
 
