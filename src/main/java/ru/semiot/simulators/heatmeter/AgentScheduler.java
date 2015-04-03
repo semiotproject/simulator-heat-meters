@@ -5,6 +5,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import madkit.kernel.Scheduler;
 import org.aeonbits.owner.ConfigFactory;
+import org.eclipse.californium.core.CoapClient;
 import ru.semiot.simulators.heatmeter.agents.HeatAgent;
 
 public class AgentScheduler extends Scheduler {

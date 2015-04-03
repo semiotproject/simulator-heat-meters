@@ -32,6 +32,10 @@ public class DescriptionResource extends CoapResource {
                 .replace("${HOST}", config.hostname())
                 .replace("${PORT}", String.valueOf(port));
     }
+    
+    public String getDescription() {
+        return description;
+    }
 
     @Override
     public void handleGET(CoapExchange exchange) {
