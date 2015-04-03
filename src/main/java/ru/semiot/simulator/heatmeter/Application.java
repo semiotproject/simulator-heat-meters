@@ -56,7 +56,7 @@ public class Application implements IListener {
         System.out.println("New meter registered and available on localhost:"
                 + Integer.toString(port));
 
-        notifier.post(String.format(DescriptionResource.text, Integer.toString(_id)), MediaTypeRegistry.TEXT_PLAIN);
+        notifier.post(String.format(DescriptionResource.text, Integer.toString(_id), Integer.toString(_id)), MediaTypeRegistry.TEXT_PLAIN);
     }
 
     @Override
