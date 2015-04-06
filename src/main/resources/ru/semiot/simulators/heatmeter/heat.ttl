@@ -1,5 +1,7 @@
 @prefix hmtr: <http://purl.org/NET/ssnext/heatmeters#> .
 @prefix meter: <http://purl.org/NET/ssnext/meters/core#> .
+@prefix ssn: <http://purl.oclc.org/NET/ssnx/ssn#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix : <coap://${HOST}:${PORT}/meter/heat#> .
 
 :${TIMESTAMP} a hmtr:HeatObservation ;
