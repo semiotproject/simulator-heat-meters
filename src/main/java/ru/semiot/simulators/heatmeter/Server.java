@@ -7,7 +7,6 @@ import org.eclipse.californium.core.CoapClient;
 import org.eclipse.californium.core.CoapResource;
 import org.eclipse.californium.core.CoapServer;
 import org.eclipse.californium.core.coap.MediaTypeRegistry;
-import org.eclipse.californium.core.network.CoAPEndpoint;
 import ru.semiot.simulators.heatmeter.coap.DescriptionResource;
 import ru.semiot.simulators.heatmeter.coap.HeatResource;
 import ru.semiot.simulators.heatmeter.coap.TemperatureResource;
@@ -20,7 +19,7 @@ public class Server extends CoapServer implements Observer {
     private final HeatResource heat;
     private final DescriptionResource description;
 
-    public Server(final CoapClient coapClient, int port) {
+    public Server(final int port) {
         super(port);
 
         temperature = new TemperatureResource(port);
@@ -30,9 +29,16 @@ public class Server extends CoapServer implements Observer {
         add(description.add(
                 new CoapResource("temperature").add(temperature),
                 new CoapResource("heat").add(heat)));
+    }
+
+    @Override
+    public void start() {
+        super.start();
         
-        coapClient.post(description.getDescription(),
-                MediaTypeRegistry.TEXT_PLAIN);
+        final CoapClient coapClient = new CoapClient(config.registerURI());
+        coapClient.setEndpoint(getEndpoints().get(0));
+        coapClient.post(description.getDescription(), MediaTypeRegistry.TEXT_PLAIN);
+        coapClient.shutdown();
     }
 
     @Override

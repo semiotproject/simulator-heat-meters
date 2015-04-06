@@ -2,7 +2,6 @@ package ru.semiot.simulators.heatmeter.coap;
 
 import java.io.IOException;
 import org.eclipse.californium.core.CoapResource;
-import org.eclipse.californium.core.coap.CoAP;
 import org.eclipse.californium.core.server.resources.CoapExchange;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -28,7 +27,6 @@ public class HeatResource extends CoapResource {
 
         setObservable(true);
         getAttributes().setObservable();
-        setObserveType(CoAP.Type.CON);
 
         try {
             this.template = IOUtils.toString(TemperatureResource.class.getResourceAsStream(
@@ -56,7 +54,6 @@ public class HeatResource extends CoapResource {
 
     @Override
     public void handleGET(CoapExchange exchange) {
-        exchange.setMaxAge(5);
         exchange.respond(CONTENT, toTurtle(heat, timestamp), TEXT_PLAIN);
     }
 
