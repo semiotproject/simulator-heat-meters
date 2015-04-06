@@ -14,4 +14,4 @@
     ssn:hasValue :${TIMESTAMP}-resultvalue .
 
 :${TIMESTAMP}-resultvalue a hmtr:HeatValue ;
-    meter:hasQuantityValue “${VALUE}”^^xsd:float"
+    meter:hasQuantityValue "${VALUE}"^^xsd:float .
