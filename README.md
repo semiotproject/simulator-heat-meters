@@ -1,6 +1,6 @@
 # simulator-heat-meters
 
-Launch application with [Docker](https://www.docker.com/):
+How to launch the application using [Docker](https://www.docker.com/):
 
 * Pull the image:
 ```bash
