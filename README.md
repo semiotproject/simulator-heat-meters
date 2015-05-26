@@ -15,6 +15,10 @@ sudo docker run \
 semiot/simulator-heat-meters
 ```
 
+How to check simulators are working:
+
+Open in [Copper](https://addons.mozilla.org/ru/firefox/addon/copper-270430/) next URI: `coap://localhost:${[startPort..startPort + count]}/.well-known/core` and "observe" registrations on `coap://localhost:${[startPort..startPort + count]}/temperature`. 
+
 How to manage simulators' configuration:
 
 Create Java properties file `/semiot-platform/simulator-heat-meters/config.properties` with next parameters:
