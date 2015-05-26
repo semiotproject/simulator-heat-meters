@@ -1,6 +1,6 @@
 # simulator-heat-meters
 
-How to launch the application using [Docker](https://www.docker.com/):
+## How to launch the application using [Docker](https://www.docker.com/):
 
 * Pull the image:
 ```bash
@@ -15,11 +15,11 @@ sudo docker run \
 semiot/simulator-heat-meters
 ```
 
-How to check simulators are working:
+## How to check simulators are working:
 
 Open in [Copper](https://addons.mozilla.org/ru/firefox/addon/copper-270430/) next URI: `coap://localhost:${[startPort..startPort + count]}/.well-known/core` and "observe" registrations on `coap://localhost:${[startPort..startPort + count]}/temperature`. 
 
-How to manage simulators' configuration:
+## How to manage simulators' configuration:
 
 Create Java properties file `/semiot-platform/simulator-heat-meters/config.properties` with next parameters:
 
