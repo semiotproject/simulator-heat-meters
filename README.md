@@ -14,7 +14,8 @@ sudo docker run \
 --expose=60000-61000/udp \
 semiot/simulator-heat-meters
 ```
-* Manage simulators' configuration
+
+How to manage simulators' configuration:
 
 Create Java properties file `/semiot-platform/simulator-heat-meters/config.properties` with next parameters:
 
