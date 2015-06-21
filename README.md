@@ -21,7 +21,7 @@ sudo docker run \
 --link ${DEVICEPROXYSERVICE_CONTAINER_ID}:deviceproxyservice \
 semiot/simulator-heat-meters
 ```
-where ${DEVICEPROXYSERVICE_CONTAINER_ID} is your Docker container ID
+where `${DEVICEPROXYSERVICE_CONTAINER_ID}` is your Docker container ID
 
 ## How to check simulators are working
 
