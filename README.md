@@ -2,18 +2,26 @@
 
 ## How to launch the application using [Docker](https://www.docker.com/):
 
-* Pull the image:
+### Pull the image
 ```bash
 sudo docker pull semiot/simulator-heat-meters
 ```
-* Run the container:
+### Create the minimal config file
+```bash
+sudo echo registerURI=coap://deviceproxyservice:3131/register > /semiot-platform/simulator-heat-meters/config.properties
+```
+You can also extend this file with other properties.
+
+### Run the container:
 ```bash
 sudo docker run \
 -i -t \
 -v /semiot-platform/simulator-heat-meters:/semiot-platform/simulator-heat-meters \
 --expose=60000-61000/udp \
+--link ${DEVICEPROXYSERVICE_CONTAINER_ID}:deviceproxyservice \
 semiot/simulator-heat-meters
 ```
+where ${DEVICEPROXYSERVICE_CONTAINER_ID} is your Docker container ID
 
 ## How to check simulators are working:
 
