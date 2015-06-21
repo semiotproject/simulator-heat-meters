@@ -12,7 +12,7 @@ sudo echo registerURI=coap://deviceproxyservice:3131/register > /semiot-platform
 ```
 You can also extend this file with other properties.
 
-### Run the container:
+### Run the container
 ```bash
 sudo docker run \
 -i -t \
@@ -23,13 +23,13 @@ semiot/simulator-heat-meters
 ```
 where ${DEVICEPROXYSERVICE_CONTAINER_ID} is your Docker container ID
 
-## How to check simulators are working:
+## How to check simulators are working
 
 Open in [Copper](https://addons.mozilla.org/ru/firefox/addon/copper-270430/) next URI: `coap://localhost:${[startPort..startPort + count]}/.well-known/core` and "observe" registrations on `coap://localhost:${[startPort..startPort + count]}/temperature`. 
 
-## How to manage simulators' configuration:
+## How to manage simulators' configuration
 
-Create Java properties file `/semiot-platform/simulator-heat-meters/config.properties` with next parameters:
+Java properties file `/semiot-platform/simulator-heat-meters/config.properties` contains next parameters:
 
   * `hostname` - ip or name of simulators' base host, using in meter description 
   * `count` - number of launching simulators
