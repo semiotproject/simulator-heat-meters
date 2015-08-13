@@ -42,7 +42,7 @@ public class TemperatureResource extends CoapResource {
     }
 
     private String toTurtle(double temperature, long timestamp) {
-        final String date = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
+        final String date = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssXXX")
                 .format(new Date(timestamp));
         return template
                 .replace("${HOST}", config.hostname())

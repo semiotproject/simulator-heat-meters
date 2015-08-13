@@ -12,7 +12,7 @@ public interface SimulatorConfig extends Config {
     @Key("hostname")
     public String hostname();
     
-    @DefaultValue("100")
+    @DefaultValue("10")
     @Key("count")
     public int metersCount();
     
@@ -39,6 +39,10 @@ public interface SimulatorConfig extends Config {
     @DefaultValue("60000")
     @Key("startPort")
     public int startPort();
+    
+    @DefaultValue("false")
+    @Key("registerOnStart")
+    public boolean registerOnStart();
     
     @DefaultValue("coap://localhost:3131/register")
     @Key("registerURI")

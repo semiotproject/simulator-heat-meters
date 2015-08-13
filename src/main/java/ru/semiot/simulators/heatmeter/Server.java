@@ -35,10 +35,12 @@ public class Server extends CoapServer implements Observer {
     public void start() {
         super.start();
         
-        final CoapClient coapClient = new CoapClient(config.registerURI());
-        coapClient.setEndpoint(getEndpoints().get(0));
-        coapClient.post(description.getDescription(), MediaTypeRegistry.TEXT_PLAIN);
-        coapClient.shutdown();
+        if(config.registerOnStart()) {
+            final CoapClient coapClient = new CoapClient(config.registerURI());
+            coapClient.setEndpoint(getEndpoints().get(0));
+            coapClient.post(description.getDescription(), MediaTypeRegistry.TEXT_PLAIN);
+            coapClient.shutdown();
+        }
     }
 
     @Override
