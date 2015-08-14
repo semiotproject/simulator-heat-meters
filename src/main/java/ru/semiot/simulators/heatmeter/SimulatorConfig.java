@@ -40,7 +40,7 @@ public interface SimulatorConfig extends Config {
     @Key("startPort")
     public int startPort();
     
-    @DefaultValue("false")
+    @DefaultValue("true")
     @Key("registerOnStart")
     public boolean registerOnStart();
     
