@@ -39,4 +39,5 @@ Java properties file `/semiot-platform/simulator-heat-meters/config.properties` 
   * `timeToStart` - time interval to launch up all simulators, s
   * `startPort` - initial port for simulators; ports `[${startPort}..${startPort + count}]` would be occupied
   * `registerURI` - URI of available Device Proxy Service
+  * `registerOnStart` - determine whether to register simulator over DeviceProxyService or not
 
