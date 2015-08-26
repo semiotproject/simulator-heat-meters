@@ -17,7 +17,7 @@ You can also extend this file with other properties.
 sudo docker run \
 -i -t \
 -v /semiot-platform/simulator-heat-meters:/semiot-platform/simulator-heat-meters \
---expose=60000-61000/udp \
+-p 60000-61000:60000-61000/udp
 --link ${DEVICEPROXYSERVICE_CONTAINER_ID}:deviceproxyservice \
 semiot/simulator-heat-meters
 ```
