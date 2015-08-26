@@ -10,10 +10,12 @@
 
 <coap://${HOST}:${PORT}/meter/temperature> a ssn:Sensor ;
     ssn:observes hmtr:Temperature ;
+    rdfs:label "Temperature" ;
     ssncom:hasCommunicationEndpoint <coap://${HOST}:${PORT}/meter/temperature/obs> .
 
 <coap://${HOST}:${PORT}/meter/heat> a ssn:Sensor ;
     ssn:observes hmtr:Heat ;
+    rdfs:label "Heat" ;
     ssncom:hasCommunicationEndpoint <coap://${HOST}:${PORT}/meter/heat/obs> .
 
 <coap://${HOST}:${PORT}/meter/temperature/obs> a ssncom:CommunicationEndpoint ;
