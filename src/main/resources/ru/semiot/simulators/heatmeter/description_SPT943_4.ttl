@@ -1,5 +1,8 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix ssn: <http://purl.oclc.org/NET/ssnx/ssn#> .
+@prefix qudt-quantity: <http://qudt.org/1.1/vocab/quantity#> .
+@prefix qudt-unit: <http://qudt.org/1.1/vocab/unit#> .
+@prefix qudt: <http://www.qudt.org/qudt/owl/1.0.0/qudt/#> .
 @prefix hmtr: <http://purl.org/NET/ssnext/heatmeters#> .
 @prefix ssncom: <http://purl.org/NET/ssnext/communication#> .
 
@@ -8,14 +11,28 @@
     ssn:hasSubsystem <coap://${HOST}:${PORT}/meter/temperature> ;
     ssn:hasSubsystem <coap://${HOST}:${PORT}/meter/heat> .
 
-<coap://${HOST}:${PORT}/meter/temperature> a ssn:Sensor ;
-    ssn:observes hmtr:Temperature ;
-    rdfs:label "Temperature" ;
+<coap://${HOST}:${PORT}/meter/temperature> a ssn:SensingDevice ;
+    ssn:observes qudt-quantity:ThermodynamicTemperature ;
+    ssn:hasMeasurementCapability [
+        a ssn:MeasurementCapability ;
+        ssn:forProperty qudt-quantity:ThermodynamicTemperature ;
+        ssn:hasMeasurementProperty [
+            a qudt:Unit ;
+            ssn:hasValue qudt-unit:DegreeCelsius
+        ]
+    ] ;
     ssncom:hasCommunicationEndpoint <coap://${HOST}:${PORT}/meter/temperature/obs> .
 
-<coap://${HOST}:${PORT}/meter/heat> a ssn:Sensor ;
-    ssn:observes hmtr:Heat ;
-    rdfs:label "Heat" ;
+<coap://${HOST}:${PORT}/meter/heat> a ssn:SensingDevice ;
+    ssn:observes qudt-quantity:SpecificHeatCapacity ;
+    ssn:hasMeasurementCapability [
+        a ssn:MeasurementCapability ;
+        ssn:forProperty qudt-quantity:SpecificHeatCapacity ;
+        ssn:hasMeasurementProperty [
+            a qudt:Unit ;
+            ssn:hasValue qudt-unit:Kilocalorie
+        ]
+    ] ;
     ssncom:hasCommunicationEndpoint <coap://${HOST}:${PORT}/meter/heat/obs> .
 
 <coap://${HOST}:${PORT}/meter/temperature/obs> a ssncom:CommunicationEndpoint ;
