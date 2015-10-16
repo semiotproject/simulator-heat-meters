@@ -18,7 +18,10 @@
         ssn:forProperty qudt-quantity:ThermodynamicTemperature ;
         ssn:hasMeasurementProperty [
             a qudt:Unit ;
-            ssn:hasValue qudt-unit:DegreeCelsius
+            ssn:hasValue [
+                a qudt:Quantity ;
+                ssn:hasValue qudt-unit:DegreeCelsius ;
+            ] ;
         ]
     ] ;
     ssncom:hasCommunicationEndpoint <coap://${HOST}:${PORT}/meter/temperature/obs> .
@@ -30,7 +33,10 @@
         ssn:forProperty qudt-quantity:SpecificHeatCapacity ;
         ssn:hasMeasurementProperty [
             a qudt:Unit ;
-            ssn:hasValue qudt-unit:Kilocalorie
+            ssn:hasValue [
+                a qudt:Quantity ;
+                ssn:hasValue qudt-unit:Kilocalorie ;
+            ] ;
         ]
     ] ;
     ssncom:hasCommunicationEndpoint <coap://${HOST}:${PORT}/meter/heat/obs> .
