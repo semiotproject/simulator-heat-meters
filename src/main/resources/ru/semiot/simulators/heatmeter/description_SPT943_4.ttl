@@ -22,7 +22,7 @@
                 a qudt:Quantity ;
                 ssn:hasValue qudt-unit:DegreeCelsius ;
             ] ;
-        ]
+        ] ;
     ] ;
     ssncom:hasCommunicationEndpoint <coap://${HOST}:${PORT}/meter/temperature/obs> .
 
