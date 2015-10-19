@@ -4,7 +4,7 @@
 
 ### Pull the image
 ```bash
-sudo docker pull semiot/simulator-heat-meters
+sudo docker pull semiot/simulator-heat-meters:v1.0.0
 ```
 ### Create the minimal config file
 ```bash
