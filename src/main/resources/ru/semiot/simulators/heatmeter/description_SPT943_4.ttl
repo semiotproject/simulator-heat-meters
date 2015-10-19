@@ -5,11 +5,13 @@
 @prefix qudt: <http://www.qudt.org/qudt/owl/1.0.0/qudt/#> .
 @prefix hmtr: <http://purl.org/NET/ssnext/heatmeters#> .
 @prefix ssncom: <http://purl.org/NET/ssnext/communication#> .
+@prefix saref: <http://ontology.tno.nl/saref#> .
 
 <coap://${HOST}:${PORT}/meter> a hmtr:HeatMeter ;
     rdfs:label "Heat Meter #${PORT}" ;
     ssn:hasSubsystem <coap://${HOST}:${PORT}/meter/temperature> ;
-    ssn:hasSubsystem <coap://${HOST}:${PORT}/meter/heat> .
+    ssn:hasSubsystem <coap://${HOST}:${PORT}/meter/heat> ;
+    saref:hasState saref:OnState .
 
 <coap://${HOST}:${PORT}/meter/temperature> a ssn:SensingDevice ;
     ssn:observes qudt-quantity:ThermodynamicTemperature ;
