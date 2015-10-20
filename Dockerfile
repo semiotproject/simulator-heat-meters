@@ -5,6 +5,11 @@ ENV APP_JAR=simulator-heat-meters-1.0-SNAPSHOT-jar-with-dependencies.jar
 
 RUN yum upgrade -y && yum install -y wget binutils unzip java-1.8.0-openjdk-devel && yum install -y maven git
 
+#
+# No cache workaround.
+#
+ADD build.number /root/build.number
+
 RUN git clone https://github.com/semiotproject/simulator-heat-meters.git
 
 WORKDIR $APP_DIR
