@@ -9,8 +9,8 @@
 
 <coap://${HOST}:${PORT}/meter> a hmtr:HeatMeter ;
     rdfs:label "Heat Meter #${PORT}" ;
-    ssn:hasSubsystem <coap://${HOST}:${PORT}/meter/temperature> ;
-    ssn:hasSubsystem <coap://${HOST}:${PORT}/meter/heat> ;
+    ssn:hasSubSystem <coap://${HOST}:${PORT}/meter/temperature> ;
+    ssn:hasSubSystem <coap://${HOST}:${PORT}/meter/heat> ;
     saref:hasState saref:OnState .
 
 <coap://${HOST}:${PORT}/meter/temperature> a ssn:SensingDevice ;
