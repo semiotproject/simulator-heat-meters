@@ -14,7 +14,7 @@ You can also extend this file with other properties.
 
 ### Run the container
 ```bash
-sudo docker run -i -t -v /semiot-platform/simulator-heat-meters:/semiot-platform/simulator-heat-meters -p 60000-61000/udp semiot/simulator-heat-meters
+sudo docker run -i -t -v /semiot-platform/simulator-heat-meters:/semiot-platform/simulator-heat-meters -p 60000-61000:60000-61000/udp semiot/simulator-heat-meters
 ```
 
 ## How to check simulators are working
