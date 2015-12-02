@@ -9,7 +9,7 @@
 :${TIMESTAMP} a ssn:Observation ;
     ssn:observedProperty qudt-quantity:SpecificHeatCapacity ;
     ssn:observationResultTime "${DATETIME}"^^xsd:dateTime ;
-    ssn:observedBy <coap://${HOST}:${PORT}/meter> ;
+    ssn:observedBy <coap://${HOST}:${PORT}/meter/heat> ;
     ssn:observationResult :${TIMESTAMP}-result .
 
 :${TIMESTAMP}-result a ssn:SensorOutput ;

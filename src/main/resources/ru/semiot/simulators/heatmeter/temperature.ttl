@@ -9,7 +9,7 @@
 :${TIMESTAMP} a ssn:Observation ;
     ssn:observedProperty qudt-quantity:ThermodynamicTemperature ;
     ssn:observationResultTime "${DATETIME}"^^xsd:dateTime ;
-    ssn:observedBy <coap://${HOST}:${PORT}/meter> ;
+    ssn:observedBy <coap://${HOST}:${PORT}/meter/temperature> ;
     ssn:observationResult :${TIMESTAMP}-result .
 
 :${TIMESTAMP}-result a ssn:SensorOutput ;
